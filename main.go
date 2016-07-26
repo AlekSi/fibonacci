@@ -27,7 +27,8 @@ func main() {
 	e.SetHTTPErrorHandler(api.ErrorHandler)
 
 	h := api.NewHandler()
-	e.GET("/fibonacci/:n", h.GetFibonacci)
+	v1 := e.Group("/api/v1")
+	v1.GET("/fibonacci/:n", h.GetFibonacci)
 
 	for _, r := range e.Routes() {
 		e.Logger().Printf("%s %s -> %s", r.Method, r.Path, r.Handler)
